@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modernus Decoration Projects LTD | Painting & Decorating Specialists</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --c-dark:   rgb(30, 30, 30);
+      --c-bronze: rgb(180, 106, 44);
+      --c-light:  rgb(245, 245, 245);
+      --c-cream:  rgb(250, 232, 219);
+      --c-white:  #ffffff;
+      --c-muted:  rgb(143, 143, 143);
+      --c-border: rgb(219, 219, 219);
+      --ff-head:  'Raleway', Arial, sans-serif;
+      --ff-body:  'Lato', Arial, sans-serif;
+      --ease:     cubic-bezier(0.22, 1, 0.36, 1);
+      --nav-h:    108px;
+      --section-pad: 120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--ff-body);
+      color: var(--c-dark);
+      background: var(--c-white);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ── SCROLL REVEAL ───────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── NAV ─────────────────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: var(--c-white);
+      border-bottom: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img {
+      height: 84px;
+      width: auto;
+      transition: opacity 0.2s;
+    }
+    .nav-logo:hover img { opacity: 0.8; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 44px;
+    }
+    .nav-links a {
+      font-family: var(--ff-body);
+      font-size: 13.5px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--c-dark);
+      position: relative;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--c-bronze);
+      transition: width 0.3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--c-bronze); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--c-dark);
+      transition: background 0.2s;
+    }
+
+    /* ── HERO ────────────────────────────────────────────────────────── */
+    #hero {
+      margin-top: var(--nav-h);
+      padding: 0 48px;
+      background: var(--c-white);
+    }
+    .hero-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 560px;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+    .hero-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+    }
+    .hero-content {
+      text-align: center;
+      width: 600px;
+      flex-shrink: 0;
+      padding: 28px 36px;
+      margin-left: 80px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 12px;
+      transition: transform 0.4s var(--ease);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-content:hover {
+      transform: translateY(-6px);
+    }
+    .hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(20px, 2.6vw, 34px);
+      font-weight: 800;
+      color: var(--c-dark);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      padding: 10px 0;
+    }
+    .hero-sub {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--c-dark);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .hero-body {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--c-dark);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .hero-checklist {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--c-dark);
+      line-height: 2.1;
+      margin-bottom: 28px;
+      list-style: none;
+    }
+    .hero-checklist li { color: var(--c-bronze); }
+    .hero-checklist li span { color: var(--c-dark); }
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 40px;
+      background: var(--c-white);
+      color: var(--c-dark);
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      border: 2px solid var(--c-white);
+      transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .hero-cta:hover {
+      background: transparent;
+      color: var(--c-dark);
+      border-color: var(--c-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTION DIVIDER ─────────────────────────────────────────────── */
+    .section-sep {
+      width: 100%;
+      height: 1px;
+      background: var(--c-border);
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────────────── */
+    #about {
+      margin-top: 80px;
+      padding: 0 48px;
+      background: var(--c-white);
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .about-img-wrap {
+      overflow: hidden;
+    }
+    .about-img {
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+      object-fit: cover;
+      display: block;
+      clip-path: inset(0 0 100% 0);
+      will-change: clip-path;
+    }
+    .about-img.revealed {
+      clip-path: inset(0 0 0% 0);
+      transition: clip-path 2.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .about-img-wrap:hover .about-img {
+      filter: brightness(1.03);
+    }
+    .about-content {
+      background: var(--c-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 72px;
+    }
+    .about-title {
+      font-family: var(--ff-head);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 800;
+      line-height: 1.18;
+      color: var(--c-dark);
+      margin-bottom: 28px;
+    }
+    .about-body {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--c-bronze);
+      font-weight: 300;
+      margin-bottom: 44px;
+    }
+    .about-body strong {
+      color: var(--c-dark);
+      font-weight: 700;
+    }
+    .btn-dark {
+      display: inline-block;
+      padding: 14px 44px;
+      background: var(--c-dark);
+      color: var(--c-white);
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      border: 2px solid var(--c-dark);
+      transition: background 0.25s, color 0.25s, transform 0.25s;
+      align-self: center;
+    }
+    .btn-dark:hover {
+      background: transparent;
+      color: var(--c-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── SERVICES ────────────────────────────────────────────────────── */
+    #services {
+      background: var(--c-white);
+      padding: var(--section-pad) 48px;
+    }
+    .services-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .services-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-bronze);
+      margin-bottom: 14px;
+    }
+    .services-title {
+      font-family: var(--ff-head);
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 800;
+      color: var(--c-dark);
+      margin-bottom: 16px;
+    }
+    .services-subtitle {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--c-muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto 64px;
+    }
+    .service-card {
+      background: var(--c-white);
+      padding: 44px 36px 40px;
+      position: relative;
+      text-align: center;
+      border-radius: 12px;
+      border: 1px solid var(--c-border);
+      transition: transform 0.38s var(--ease), box-shadow 0.38s var(--ease), border-color 0.38s;
+      overflow: hidden;
+    }
+    /* 6 unique hover animations */
+    .service-card:nth-child(1):hover {
+      transform: translateY(-12px);
+      box-shadow: 0 24px 56px rgba(0,0,0,0.1);
+      border-color: var(--c-bronze);
+    }
+    .service-card:nth-child(2):hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 36px rgba(180,106,44,0.18);
+      border-color: var(--c-bronze);
+    }
+    .service-card:nth-child(3):hover {
+      transform: translateY(-8px) rotate(1.5deg);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.09);
+      border-color: var(--c-bronze);
+    }
+    .service-card:nth-child(4):hover {
+      transform: translateX(10px);
+      box-shadow: -10px 10px 36px rgba(180,106,44,0.13);
+      border-color: var(--c-bronze);
+    }
+    .service-card:nth-child(5):hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.1);
+      border-color: var(--c-bronze);
+    }
+    .service-card:nth-child(6):hover {
+      transform: rotate(-2deg) scale(1.04);
+      box-shadow: 0 14px 44px rgba(180,106,44,0.16);
+      border-color: var(--c-bronze);
+    }
+    .service-card-icon {
+      width: 72px;
+      height: 72px;
+      background: var(--c-cream);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: background 0.35s, transform 0.35s var(--ease);
+    }
+    .service-card:hover .service-card-icon {
+      background: var(--c-bronze);
+      transform: scale(1.1);
+    }
+    .service-card-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--c-bronze);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.35s;
+    }
+    .service-card:hover .service-card-icon svg { stroke: var(--c-white); }
+    .service-card:hover .service-card-icon img { filter: brightness(0) invert(1) !important; }
+    .service-card-title {
+      font-family: var(--ff-head);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--c-dark);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    .service-card-divider {
+      width: 32px;
+      height: 2px;
+      background: var(--c-bronze);
+      margin: 0 auto 16px;
+      transition: width 0.4s var(--ease);
+    }
+    .hero-cta { align-self: center; }
+    .service-card:hover .service-card-divider { width: 52px; }
+    .service-card-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: rgb(100, 100, 100);
+      line-height: 1.8;
+    }
+
+    /* ── WHY CHOOSE ──────────────────────────────────────────────────── */
+    #why {
+      background: var(--c-light);
+      padding: var(--section-pad) 48px;
+      text-align: center;
+    }
+    .why-sep {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      height: 1px;
+      background: var(--c-border);
+    }
+    .why-title {
+      font-family: var(--ff-head);
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 800;
+      color: var(--c-dark);
+      margin-bottom: 72px;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .why-item {
+      padding: 32px 20px;
+      transition: background 0.25s, transform 0.3s var(--ease);
+    }
+    .why-item:hover {
+      background: var(--c-white);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+    }
+    .why-item-title {
+      font-family: var(--ff-head);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--c-dark);
+      line-height: 1.35;
+      margin-bottom: 16px;
+    }
+    .why-item-text {
+      font-size: 13.5px;
+      line-height: 1.78;
+      color: var(--c-bronze);
+      font-weight: 300;
+    }
+    .why-item-text strong {
+      color: var(--c-dark);
+      font-weight: 700;
+    }
+
+    /* ── PORTFOLIO ───────────────────────────────────────────────────── */
+    #portfolio {
+      padding: var(--section-pad) 48px;
+      background: var(--c-white);
+      text-align: center;
+    }
+    .portfolio-title {
+      font-family: var(--ff-head);
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 800;
+      color: var(--c-dark);
+      margin-bottom: 72px;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 56px;
+    }
+    .portfolio-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .portfolio-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.65s var(--ease);
+    }
+    .portfolio-card:hover img { transform: scale(1.06); }
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30,30,30,0);
+      transition: background 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .portfolio-card:hover .portfolio-overlay { background: rgba(30,30,30,0.55); }
+    .portfolio-label {
+      color: var(--c-white);
+      font-family: var(--ff-head);
+      font-size: 18px;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.35s var(--ease);
+    }
+    .portfolio-card:hover .portfolio-label { opacity: 1; transform: translateY(0); }
+
+    /* ── TESTIMONIALS ────────────────────────────────────────────────── */
+    #testimonials {
+      background: var(--c-light);
+      padding: var(--section-pad) 48px;
+      text-align: center;
+    }
+    .testimonials-title {
+      font-family: var(--ff-head);
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 800;
+      color: var(--c-dark);
+      margin-bottom: 72px;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--c-white);
+      padding: 44px 36px;
+      text-align: left;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 44px rgba(0,0,0,0.09);
+    }
+    .t-stars {
+      color: var(--c-bronze);
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+    .t-text {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: rgb(86,86,86);
+      font-style: italic;
+      margin-bottom: 28px;
+      font-family: var(--ff-body);
+      font-weight: 300;
+    }
+    .t-divider {
+      width: 28px; height: 2px;
+      background: var(--c-bronze);
+      margin-bottom: 16px;
+    }
+    .t-name {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-dark);
+    }
+    .t-loc {
+      font-size: 12px;
+      color: var(--c-muted);
+      margin-top: 3px;
+    }
+
+    /* ── CONTACT ─────────────────────────────────────────────────────── */
+    #contact {
+      background: var(--c-white);
+      padding: var(--section-pad) 48px;
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 88px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .contact-title {
+      font-family: var(--ff-head);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 800;
+      color: var(--c-dark);
+      margin-bottom: 20px;
+    }
+    .contact-sub {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--c-bronze);
+      font-weight: 300;
+      margin-bottom: 48px;
+    }
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px;
+      background: var(--c-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--c-bronze);
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-detail:hover .contact-detail-icon {
+      background: var(--c-bronze);
+      color: var(--c-white);
+    }
+    .contact-detail-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 4px;
+    }
+    .contact-detail-value {
+      font-size: 14px;
+      color: var(--c-dark);
+    }
+    .contact-detail-value a:hover { color: var(--c-bronze); }
+    .contact-areas {
+      margin-top: 40px;
+      padding: 22px 24px;
+      background: var(--c-light);
+      border-left: 3px solid var(--c-bronze);
+    }
+    .contact-areas-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-bronze);
+      margin-bottom: 8px;
+    }
+    .contact-areas-text {
+      font-size: 13.5px;
+      color: rgb(86,86,86);
+      line-height: 1.75;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 13px 16px;
+      font-family: var(--ff-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--c-dark);
+      background: var(--c-light);
+      border: 1.5px solid transparent;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--c-bronze);
+      background: var(--c-white);
+    }
+    .form-textarea { min-height: 130px; resize: vertical; }
+    .form-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--c-dark);
+      color: var(--c-white);
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      border: 2px solid var(--c-dark);
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.25s;
+      margin-top: 8px;
+    }
+    .form-submit:hover {
+      background: transparent;
+      color: var(--c-dark);
+      transform: translateY(-2px);
+    }
+    .form-note {
+      font-size: 12px;
+      color: var(--c-muted);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────── */
+    #footer {
+      background: var(--c-dark);
+      padding: 80px 48px 44px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-logo-img {
+      height: 64px;
+      width: auto;
+      filter: invert(1) brightness(2);
+      margin-bottom: 20px;
+    }
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.82;
+      color: rgba(255,255,255,0.38);
+      font-weight: 300;
+      margin-bottom: 26px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .footer-social a {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.4);
+      transition: all 0.25s;
+    }
+    .footer-social a:hover { border-color: var(--c-bronze); color: var(--c-bronze); }
+    .footer-social svg { width: 15px; height: 15px; }
+    .footer-col-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-white);
+      margin-bottom: 24px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+      transition: color 0.2s;
+      font-weight: 300;
+    }
+    .footer-links a:hover { color: var(--c-bronze); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 36px;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+    }
+    .footer-copy a { color: var(--c-bronze); }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      :root {
+        --section-pad: 72px;
+        --nav-h: 80px;
+      }
+
+      /* Nav */
+      .nav-inner { padding: 0 20px; }
+      .nav-logo img { height: 56px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* Hero */
+      #hero { padding: 0 12px; }
+      .hero-inner { height: 520px; }
+      .hero-text { justify-content: center; align-items: center; padding: 12px; }
+      .hero-content {
+        width: calc(100% - 24px) !important;
+        max-width: calc(100% - 24px) !important;
+        flex-shrink: 1 !important;
+        margin-left: 0 !important;
+        padding: 20px 16px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .hero-cta { align-self: center; }
+
+      /* About */
+      #about { padding: 0 16px; margin-top: 48px; }
+      .about-inner { grid-template-columns: 1fr; }
+      .about-img-wrap { height: 300px; }
+      .about-img { min-height: 300px; }
+      .about-content { padding: 40px 24px; }
+
+      /* Services */
+      #services { padding: 72px 16px; }
+      .services-grid { grid-template-columns: 1fr; gap: 16px; }
+      .service-card { padding: 28px 24px; }
+
+      /* Why */
+      #why { padding: 72px 16px; }
+      .why-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .why-item { padding: 20px 14px; }
+      .why-sep { margin-bottom: 48px; }
+
+      /* Portfolio */
+      #portfolio { padding: 72px 16px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+
+      /* Testimonials */
+      #testimonials { padding: 72px 16px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      /* Contact */
+      #contact { padding: 72px 16px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      /* Footer */
+      #footer { padding: 56px 20px 32px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      :root { --nav-h: 72px; }
+      .nav-logo img { height: 48px; }
+      .hero-inner { min-height: 340px; }
+      .hero-title { font-size: 20px; }
+      .hero-sub, .hero-body, .hero-checklist { font-size: 12px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .about-content { padding: 32px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .contact-title { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="logo-m.avif" alt="Modernus" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <img class="hero-img" src="hero.png" alt="Modernus decoration project" />
+      <div class="hero-text">
+        <div class="hero-content">
+          <h1 class="hero-title">Expert Painting &amp; Decorating in<br>Cheam &amp; South West London</h1>
+          <p class="hero-sub">Professional interior &amp; exterior decorating services across Cheam, Putney, Chelsea, Wimbledon, Kingston and nearby South West London areas.</p>
+          <p class="hero-body">High-quality finishes, reliable workmanship, and clean, professional service for homes and businesses.</p>
+          <ul class="hero-checklist">
+            <li>&#10004; <span>Interior &amp; Exterior Painting</span></li>
+            <li>&#10004; <span>Residential &amp; Commercial Decorating</span></li>
+            <li>&#10004; <span>Wallpaper &amp; Woodwork Finishing</span></li>
+          </ul>
+          <a href="#contact" class="hero-cta">Get Your Free Quote Today</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-inner">
+    <div class="about-img-wrap">
+      <img
+        class="about-img"
+        src="about.png"
+        alt="Modernus decoration project"
+      />
+    </div>
+    <div class="about-content">
+      <h2 class="about-title reveal">Trusted Interior &amp; Exterior<br>Decoration Experts</h2>
+      <p class="about-body reveal reveal-delay-1">
+        Modernus is a team of dedicated interior and exterior painting and decorating specialists with over <strong>15 years of experience</strong>. We are fully insured and committed to delivering exceptional service. Our attention to <strong>detail</strong> and client-focused approach set us apart.
+      </p>
+      <a href="#contact" class="btn-dark reveal reveal-delay-2">Read More</a>
+    </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header reveal">
+      <span class="services-label">What We Do</span>
+      <h2 class="services-title">Our Services</h2>
+      <p class="services-subtitle">From a single room to a full property, we deliver high-quality results on every job — residential or commercial.</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Interior Painting -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 64 64">
+            <!-- Paint roller -->
+            <rect x="12" y="10" width="34" height="18" rx="4"/>
+            <rect x="14" y="13" width="30" height="12" rx="2"/>
+            <line x1="29" y1="28" x2="29" y2="40"/>
+            <path d="M29 40 L38 40 L38 56"/>
+            <rect x="34" y="53" width="8" height="5" rx="1"/>
+          </svg>
+        </div>
+        <h3 class="service-card-title">Interior Painting</h3>
+        <div class="service-card-divider"></div>
+        <p class="service-card-desc">Flawless interior painting for every room. Expert preparation, crisp edges, and a smooth lasting finish matched precisely to your chosen colour.</p>
+      </div>
+
+      <!-- Exterior Painting -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 64 64">
+            <!-- House -->
+            <path d="M8 30 L32 12 L56 30"/>
+            <path d="M14 26 L14 54 L50 54 L50 26"/>
+            <rect x="24" y="38" width="16" height="16"/>
+            <!-- Brush stroke on side -->
+            <path d="M50 20 Q58 16 60 10 Q54 8 48 14 Q44 18 46 22 Z"/>
+            <line x1="50" y1="20" x2="55" y2="26"/>
+          </svg>
+        </div>
+        <h3 class="service-card-title">Exterior Painting</h3>
+        <div class="service-card-divider"></div>
+        <p class="service-card-desc">Full exterior repaints using premium weather-resistant coatings. We protect and transform your property's façade to stand the test of time.</p>
+      </div>
+
+      <!-- Spray Painting -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-card-icon">
+          <svg viewBox="0 0 64 64">
+            <!-- Spray gun body -->
+            <path d="M10 28 L36 28 L36 44 L10 44 Q8 44 8 42 L8 30 Q8 28 10 28 Z"/>
+            <!-- Nozzle -->
+            <path d="M36 32 L48 26 L50 28 L38 36 Z"/>
+            <!-- Handle -->
+            <path d="M18 44 L16 56 L26 56 L28 44"/>
+            <!-- Spray dots -->
+            <circle cx="52" cy="22" r="2" fill="currentColor" stroke="none"/>
+            <circle cx="56" cy="26" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="56" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="60" cy="22" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3 class="service-card-title">Spray Painting</h3>
+        <div class="service-card-divider"></div>
+        <p class="service-card-desc">Modern airless spray techniques delivering a factory-smooth, even finish on large surfaces, cabinetry, doors, and furniture — fast and flawless.</p>
+      </div>
+
+      <!-- Traditional Painting -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card-icon">
+          <img src="icon-3.png"
+               alt="Traditional painting icon"
+               style="width:34px;height:34px;object-fit:contain;filter:invert(47%) sepia(61%) saturate(450%) hue-rotate(357deg) brightness(90%) contrast(90%);" />
+        </div>
+        <h3 class="service-card-title">Traditional Painting</h3>
+        <div class="service-card-divider"></div>
+        <p class="service-card-desc">Time-honoured brush and roller methods for exceptional depth, control, and finish quality. Ideal for period properties and intricate surfaces.</p>
+      </div>
+
+      <!-- Wallpaper Hanging -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-card-icon">
+          <img src="icon-2.png"
+               alt="Wallpaper hanging icon"
+               style="width:34px;height:34px;object-fit:contain;filter:invert(47%) sepia(61%) saturate(450%) hue-rotate(357deg) brightness(90%) contrast(90%);" />
+        </div>
+        <h3 class="service-card-title">Wallpaper Hanging</h3>
+        <div class="service-card-divider"></div>
+        <p class="service-card-desc">Precision wallpaper installation for any weight, pattern, or surface. Perfectly aligned seams and bubble-free results — every single time.</p>
+      </div>
+
+      <!-- Woodwork & Finishing -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-card-icon">
+          <img src="icon.png"
+               alt="Woodwork icon"
+               style="width:34px;height:34px;object-fit:contain;filter:invert(47%) sepia(61%) saturate(450%) hue-rotate(357deg) brightness(90%) contrast(90%);" />
+        </div>
+        <h3 class="service-card-title">Woodwork &amp; Finishing</h3>
+        <div class="service-card-divider"></div>
+        <p class="service-card-desc">Expert painting and finishing of doors, skirting boards, architraves, and bespoke woodwork. Crisp, clean lines that complete the whole look.</p>
+      </div>
+
+    </div>
+    <div class="reveal" style="text-align:center">
+      <a href="#contact" class="btn-dark" style="display:inline-block;">Request a Free Quote</a>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- WHY CHOOSE -->
+  <section id="why">
+    <div class="why-sep"></div>
+    <h2 class="why-title reveal">Why Choose Modernus</h2>
+    <div class="why-grid">
+      <div class="why-item reveal reveal-delay-1">
+        <h3 class="why-item-title">Hybrid Expertise:<br>Spray &amp; Traditional Painting</h3>
+        <p class="why-item-text">Blending <strong>cutting-edge spray</strong> painting with the craftsmanship of brush and roller for flawless, efficient results.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <h3 class="why-item-title">Detail-Obsessed<br>Decorative Finishes</h3>
+        <p class="why-item-text">Specialists in <strong>precision work</strong> and decorative finishes – where every line, edge, and texture matters.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-3">
+        <h3 class="why-item-title">Free Consultations<br>at Your Home</h3>
+        <p class="why-item-text">We offer <strong>free in-home consultations</strong> to discuss your decoration needs and provide personalised recommendations tailored to your space and style.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-4">
+        <h3 class="why-item-title">Licensed &amp; Insured<br>Specialists</h3>
+        <p class="why-item-text">As <strong>licensed and insured</strong> specialists, we prioritise the safety and satisfaction of our clients, ensuring peace of mind throughout the decoration process.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <h2 class="portfolio-title reveal">Our Portfolio</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal reveal-delay-1">
+        <img src="interior-main.png" alt="Interior painting project" />
+        <div class="portfolio-overlay">
+          <span class="portfolio-label">Interior Painting</span>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-2">
+        <img src="hero.png" alt="Exterior painting project" />
+        <div class="portfolio-overlay">
+          <span class="portfolio-label">Exterior Painting</span>
+        </div>
+      </div>
+      <div class="portfolio-card reveal reveal-delay-3">
+        <img src="wallpaper-main.png" alt="Wallpaper finishes project" />
+        <div class="portfolio-overlay">
+          <span class="portfolio-label">Wallpaper Finishes</span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <a href="#contact" class="btn-dark" style="display: inline-block; margin: 0 auto;">View All Projects</a>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <h2 class="testimonials-title reveal">What Our Clients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"Modernus transformed our Victorian terrace — the attention to detail on the cornicing and skirting boards was exceptional. Punctual, tidy, and a pleasure to have in our home."</p>
+        <div class="t-divider"></div>
+        <p class="t-name">Jonathan M.</p>
+        <p class="t-loc">Chelsea, London</p>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"Incredible work on our feature wall. The bespoke finish they recommended completely elevated the whole room. Professional from start to finish — would not hesitate to recommend."</p>
+        <div class="t-divider"></div>
+        <p class="t-name">Claire R.</p>
+        <p class="t-loc">Fulham, London</p>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-3">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"The exterior of our house looks brand new. Modernus completed the full repaint in just three days and the quality is outstanding — neighbours keep asking who did the work!"</p>
+        <div class="t-divider"></div>
+        <p class="t-name">Mark T.</p>
+        <p class="t-loc">Putney, London</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div>
+        <h2 class="contact-title reveal">Get In Touch</h2>
+        <p class="contact-sub reveal reveal-delay-1">Ready to transform your space? Contact us for a free, no-obligation consultation and we'll provide a detailed competitive quote.</p>
+        <div class="contact-details reveal reveal-delay-2">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <p class="contact-detail-label">Email</p>
+              <p class="contact-detail-value"><a href="mailto:info@modernusdecorationprojects.co.uk">info@modernusdecorationprojects.co.uk</a></p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </div>
+            <div>
+              <p class="contact-detail-label">Phone</p>
+              <p class="contact-detail-value"><a href="tel:+447447947665">+44 7447 947665</a></p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <p class="contact-detail-label">Address</p>
+              <p class="contact-detail-value">31 Ewell Road, SM3 8AU</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-areas reveal reveal-delay-3">
+          <p class="contact-areas-label">Service Areas</p>
+          <p class="contact-areas-text">Putney &bull; Chelsea &bull; Fulham &bull; Notting Hill &bull; Wandsworth &bull; Wimbledon &bull; Kingston &bull; Southwest London</p>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <input class="form-input" type="text" id="f-name" placeholder="First Name" required />
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <input class="form-input" type="text" id="f-last" placeholder="Last Name" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <input class="form-input" type="email" id="f-email" placeholder="Email" required />
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <input class="form-input" type="tel" id="f-phone" placeholder="Phone" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <input class="form-input" type="text" id="f-address" placeholder="Address" />
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <input class="form-input" type="text" id="f-subject" placeholder="Subject" />
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea class="form-textarea" id="f-msg" placeholder="Type your message here..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+          <p class="form-note">We respond within 24 hours. All quotes are free &amp; no-obligation.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <img src="logo-m.avif" alt="Modernus" class="footer-logo-img" />
+          <p class="footer-desc">Southwest London's trusted painting and decorating specialists. Exceptional craftsmanship and attention to detail on every project since 2009.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title">Services</p>
+          <ul class="footer-links">
+            <li><a href="#services">Interior Painting</a></li>
+            <li><a href="#services">Exterior Painting</a></li>
+            <li><a href="#services">Wallpaper Hanging</a></li>
+            <li><a href="#services">Decorative Finishes</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Contact</p>
+          <ul class="footer-links">
+            <li><a href="mailto:info@modernusdecorationprojects.co.uk">info@modernusdecorationprojects.co.uk</a></li>
+            <li><a href="tel:+447447947665">+44 7447 947665</a></li>
+            <li>31 Ewell Road, SM3 8AU</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2024 Modernus Decoration Projects LTD. Website by <a href="#">MartKam Digital</a>.</p>
+        <p class="footer-copy" style="color:rgba(255,255,255,0.18)">Serving Southwest London</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Scroll reveal */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('visible');
+          observer.unobserve(el.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* About image slow reveal on scroll */
+    const aboutImg = document.querySelector('.about-img');
+    const aboutWrap = document.querySelector('.about-img-wrap');
+
+    function updateAboutReveal() {
+      const rect = aboutWrap.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      const inView = rect.top < windowH * 0.85;
+
+      if (inView) {
+        aboutImg.classList.add('revealed');
+      } else {
+        /* Snap reset instantly so animation replays fresh next scroll-down */
+        aboutImg.style.transition = 'none';
+        aboutImg.classList.remove('revealed');
+        /* Force reflow so removing transition takes effect before next paint */
+        void aboutImg.offsetHeight;
+        aboutImg.style.transition = '';
+      }
+    }
+
+    window.addEventListener('scroll', updateAboutReveal, { passive: true });
+    updateAboutReveal();
+
+    /* Form submit */
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.form-submit');
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = 'rgb(60,140,60)';
+      btn.style.borderColor = 'rgb(60,140,60)';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = 'Send Message';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.disabled = false;
+        this.reset();
+      }, 3500);
+    });
+  </script>
+</body>
+</html>
