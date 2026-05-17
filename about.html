@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Modernus Decoration Projects LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── About page specific ─────────────────────────────────────────── */
+
+    /* Page hero banner */
+    .about-hero {
+      margin-top: var(--nav-h);
+      background: var(--c-dark);
+      padding: 80px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(180,106,44,0.12) 0%, transparent 65%),
+                  radial-gradient(ellipse at 70% 50%, rgba(180,106,44,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .about-hero-label {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--c-bronze); margin-bottom: 16px;
+    }
+    .about-hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      color: var(--c-white);
+      line-height: 1.1;
+      position: relative;
+    }
+
+    /* Breadcrumb */
+    .about-breadcrumb {
+      background: var(--c-light);
+      padding: 14px 48px;
+      font-size: 13px;
+      color: var(--c-muted);
+    }
+    .about-breadcrumb a { color: var(--c-bronze); }
+    .about-breadcrumb a:hover { text-decoration: underline; }
+    .about-breadcrumb span { margin: 0 8px; }
+
+    /* Founder section */
+    .founder-section {
+      padding: var(--section-pad) 48px;
+      background: var(--c-white);
+    }
+    .founder-inner {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 64px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    .founder-photo-col { position: relative; }
+    .founder-photo-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .founder-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.8s var(--ease);
+    }
+    .founder-photo-wrap:hover .founder-photo { transform: scale(1.03); }
+    .founder-badge {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--c-dark);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .founder-badge-accent {
+      width: 4px;
+      height: 48px;
+      background: var(--c-bronze);
+      flex-shrink: 0;
+    }
+    .founder-name {
+      font-family: var(--ff-head);
+      font-size: 20px; font-weight: 800;
+      color: var(--c-white);
+      line-height: 1.2;
+    }
+    .founder-title {
+      font-size: 12px; font-weight: 400;
+      color: var(--c-bronze);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .founder-content { padding-top: 8px; }
+    .founder-eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--c-bronze); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .founder-eyebrow::before {
+      content: '';
+      width: 32px; height: 2px;
+      background: var(--c-bronze); flex-shrink: 0;
+    }
+    .founder-heading {
+      font-family: var(--ff-head);
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 800;
+      color: var(--c-dark);
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+    .founder-quote {
+      position: relative;
+      padding: 24px 28px;
+      background: var(--c-cream);
+      border-left: 4px solid var(--c-bronze);
+      margin-bottom: 28px;
+    }
+    .founder-quote-mark {
+      font-family: var(--ff-head);
+      font-size: 64px;
+      color: var(--c-bronze);
+      opacity: 0.35;
+      line-height: 0.6;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .founder-quote-text {
+      font-family: var(--ff-head);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--c-dark);
+      line-height: 1.7;
+      font-weight: 500;
+    }
+    .founder-text {
+      font-size: 15px; line-height: 1.88;
+      color: rgb(101,101,101); font-weight: 300;
+      margin-bottom: 20px;
+    }
+    .founder-text strong { color: var(--c-dark); font-weight: 700; }
+    .founder-divider {
+      width: 48px; height: 2px;
+      background: var(--c-bronze);
+      margin: 28px 0;
+    }
+    .founder-sig {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .founder-sig-line {
+      width: 48px; height: 2px;
+      background: var(--c-border);
+    }
+    .founder-sig-name {
+      font-family: var(--ff-head);
+      font-size: 16px; font-weight: 800;
+      color: var(--c-dark);
+    }
+    .founder-sig-role {
+      font-size: 12px; color: var(--c-muted);
+      letter-spacing: 0.08em;
+    }
+    .about-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .about-stat-box {
+      padding: 22px 18px;
+      background: var(--c-light);
+      border-left: 3px solid var(--c-bronze);
+      text-align: center;
+    }
+    .about-stat-box-num {
+      font-family: var(--ff-head);
+      font-size: 30px; font-weight: 800;
+      color: var(--c-bronze); line-height: 1;
+    }
+    .about-stat-box-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--c-muted); margin-top: 6px;
+    }
+
+    /* Services list */
+    .about-services {
+      padding: var(--section-pad) 48px;
+      background: var(--c-light);
+    }
+    .about-services-inner { max-width: 1100px; margin: 0 auto; }
+    .about-services-title {
+      font-family: var(--ff-head);
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 800;
+      color: var(--c-dark);
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .about-service-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 36px;
+      align-items: flex-start;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .about-service-row:first-of-type { border-top: 1px solid var(--c-border); }
+    .about-service-icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px; height: 80px;
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: 50%;
+      flex-shrink: 0;
+      color: var(--c-bronze);
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .about-service-row:hover .about-service-icon-wrap {
+      background: var(--c-bronze);
+      border-color: var(--c-bronze);
+      color: var(--c-white);
+    }
+    .about-service-icon-wrap img {
+      width: 38px; height: 38px;
+      object-fit: contain;
+      filter: invert(47%) sepia(61%) saturate(450%) hue-rotate(357deg) brightness(90%) contrast(90%);
+      transition: filter 0.25s;
+    }
+    .about-service-row:hover .about-service-icon-wrap img {
+      filter: brightness(0) invert(1);
+    }
+    .about-service-icon-wrap svg {
+      width: 38px; height: 38px;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .about-service-name {
+      font-family: var(--ff-head);
+      font-size: 20px; font-weight: 800;
+      color: var(--c-dark); margin-bottom: 12px;
+    }
+    .about-service-desc {
+      font-size: 15px; line-height: 1.85;
+      color: rgb(101,101,101); font-weight: 300;
+    }
+
+    /* Quality guarantee */
+    .about-quality {
+      padding: var(--section-pad) 48px;
+      background: var(--c-white);
+      text-align: center;
+    }
+    .about-quality-inner { max-width: 800px; margin: 0 auto; }
+    .about-quality-title {
+      font-family: var(--ff-head);
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 800;
+      color: var(--c-dark);
+      margin-bottom: 28px;
+    }
+    .about-quality-text {
+      font-size: 16px; line-height: 1.9;
+      color: rgb(101,101,101); font-weight: 300;
+      margin-bottom: 16px;
+    }
+    .about-quality-text strong { color: var(--c-dark); font-weight: 700; }
+    .about-quality-promise {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding: 16px 32px;
+      background: var(--c-cream);
+      border-left: 4px solid var(--c-bronze);
+      font-size: 15px; font-weight: 700;
+      color: var(--c-dark);
+    }
+
+    /* CTA banner */
+    .about-cta {
+      background: var(--c-dark);
+      padding: 100px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(180,106,44,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .about-cta-text {
+      font-family: var(--ff-head);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 800;
+      color: var(--c-white);
+      line-height: 1.35;
+      max-width: 760px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+    .about-cta-btn {
+      display: inline-block;
+      padding: 16px 52px;
+      background: transparent;
+      color: var(--c-white);
+      font-family: var(--ff-body);
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.12em;
+      border: 2px solid rgba(255,255,255,0.5);
+      position: relative;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .about-cta-btn:hover {
+      background: var(--c-bronze);
+      border-color: var(--c-bronze);
+      transform: translateY(-2px);
+    }
+
+    /* ── Responsive: tablet ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      /* Hero */
+      .about-hero { padding: 56px 20px; }
+      .about-breadcrumb { padding: 12px 20px; }
+
+      /* Founder */
+      .founder-section { padding: 64px 20px; }
+      .founder-inner { grid-template-columns: 1fr; gap: 40px; }
+      .founder-photo { aspect-ratio: 3/2; object-position: center 15%; }
+      .founder-quote { padding: 20px 20px; }
+      .founder-quote-text { font-size: 15px; }
+
+      /* Stats */
+      .about-stats-row { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .about-stat-box { padding: 16px 12px; }
+      .about-stat-box-num { font-size: 24px; }
+
+      /* Services */
+      .about-services { padding: 64px 20px; }
+      .about-service-row { grid-template-columns: 68px 1fr; gap: 20px; padding: 28px 0; }
+      .about-service-icon-wrap { width: 68px; height: 68px; }
+
+      /* Quality */
+      .about-quality { padding: 64px 20px; }
+      .about-quality-text { font-size: 15px; }
+      .about-quality-promise {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 20px;
+        gap: 8px;
+      }
+
+      /* CTA */
+      .about-cta { padding: 64px 20px; }
+      .about-cta-btn { padding: 15px 36px; }
+    }
+
+    /* ── Responsive: phone ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .about-hero { padding: 48px 16px; }
+      .about-breadcrumb { padding: 10px 16px; }
+
+      /* Founder */
+      .founder-section { padding: 52px 16px; }
+      .founder-photo { aspect-ratio: 4/3; object-position: center 10%; }
+      .founder-badge { padding: 16px 18px; gap: 12px; }
+      .founder-badge-accent { height: 36px; }
+      .founder-name { font-size: 16px; }
+      .founder-title { font-size: 10px; }
+      .founder-heading { font-size: 26px; }
+      .founder-quote { padding: 16px 16px; }
+      .founder-quote-mark { font-size: 48px; }
+      .founder-quote-text { font-size: 14px; }
+      .founder-text { font-size: 14px; }
+
+      /* Stats */
+      .about-stats-row { grid-template-columns: 1fr; gap: 12px; }
+
+      /* Services */
+      .about-services { padding: 52px 16px; }
+      .about-services-title { font-size: 26px; margin-bottom: 40px; }
+      .about-service-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 24px 0;
+      }
+      .about-service-icon-wrap { margin: 0 auto; }
+      .about-service-name { text-align: center; font-size: 18px; }
+      .about-service-desc { font-size: 14px; }
+
+      /* Quality */
+      .about-quality { padding: 52px 16px; }
+      .about-quality-title { font-size: 24px; }
+      .about-quality-text { font-size: 14px; }
+      .about-quality-promise { font-size: 13px; padding: 16px; }
+
+      /* CTA */
+      .about-cta { padding: 52px 16px; }
+      .about-cta-text { font-size: 20px; }
+      .about-cta-btn { padding: 14px 28px; letter-spacing: 0.06em; }
+
+      /* Sig */
+      .founder-sig { margin-top: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo-m.avif" alt="Modernus" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" style="color:var(--c-bronze)">About</a></li>
+        <li><a href="index.html#portfolio">Portfolio</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-panel">
+      <ul>
+        <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="about.html" class="mobile-nav-link">About</a></li>
+        <li><a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a></li>
+        <li><a href="index.html#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <a href="index.html#contact" class="mobile-nav-link mobile-cta">Get a Free Quote</a>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="about-hero">
+    <p class="about-hero-label reveal">Our Story</p>
+    <h1 class="about-hero-title reveal reveal-delay-1">About Modernus</h1>
+  </section>
+
+  <!-- BREADCRUMB -->
+  <div class="about-breadcrumb">
+    <a href="index.html">Home</a><span>›</span>About
+  </div>
+
+  <!-- FOUNDER SECTION -->
+  <section class="founder-section">
+    <div class="founder-inner">
+
+      <!-- Founder photo -->
+      <div class="founder-photo-col reveal">
+        <div class="founder-photo-wrap">
+          <img class="founder-photo" src="founder-pic1.png" alt="Kamil Kaminski — Founder of Modernus" />
+          <div class="founder-badge">
+            <div class="founder-badge-accent"></div>
+            <div>
+              <div class="founder-name">Kamil Kaminski</div>
+              <div class="founder-title">Founder &amp; Lead Decorator</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Founder story -->
+      <div class="founder-content">
+        <p class="founder-eyebrow reveal">Meet the Founder</p>
+        <h2 class="founder-heading reveal reveal-delay-1">Built on Passion,<br>Delivered with Pride</h2>
+
+        <div class="founder-quote reveal reveal-delay-2">
+          <span class="founder-quote-mark">"</span>
+          <p class="founder-quote-text">I started Modernus because I genuinely love what I do. Every wall, every finish, every project — it's personal to me. I take pride in treating every home as if it were my own.</p>
+        </div>
+
+        <p class="founder-text reveal reveal-delay-3">
+          I'm Kamil Kaminski, founder of Modernus Decoration Projects. My journey in painting and decorating began over <strong>15 years ago</strong>, starting on building sites across London where I quickly developed a deep passion for the craft — the precision, the transformation, the satisfaction of a job done right.
+        </p>
+        <p class="founder-text reveal reveal-delay-3">
+          What started as a one-man operation driven by word of mouth has grown into a trusted name across <strong>South West London</strong>. I built Modernus on a simple belief: that every client deserves honest communication, expert workmanship, and a finish they're genuinely proud of.
+        </p>
+        <p class="founder-text reveal reveal-delay-3">
+          I blend <strong>modern spray painting techniques</strong> with traditional brush and roller methods — giving clients the best of both worlds. Whether it's a single room refresh or a full exterior repaint, I bring the same level of care and attention to every single job.
+        </p>
+
+        <div class="founder-divider reveal reveal-delay-3"></div>
+
+        <div class="about-stats-row reveal reveal-delay-4">
+          <div class="about-stat-box">
+            <div class="about-stat-box-num">15+</div>
+            <div class="about-stat-box-label">Years Experience</div>
+          </div>
+          <div class="about-stat-box">
+            <div class="about-stat-box-num">500+</div>
+            <div class="about-stat-box-label">Projects Completed</div>
+          </div>
+          <div class="about-stat-box">
+            <div class="about-stat-box-num">100%</div>
+            <div class="about-stat-box-label">Client Satisfaction</div>
+          </div>
+        </div>
+
+        <div class="founder-sig reveal reveal-delay-4">
+          <div class="founder-sig-line"></div>
+          <div>
+            <div class="founder-sig-name">Kamil Kaminski</div>
+            <div class="founder-sig-role">Founder, Modernus Decoration Projects LTD</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ALL SERVICES -->
+  <section class="about-services">
+    <div class="about-services-inner">
+      <h2 class="about-services-title reveal">All Services Provided</h2>
+
+      <div class="about-service-row reveal">
+        <div class="about-service-icon-wrap">
+          <svg viewBox="0 0 64 64">
+            <rect x="12" y="10" width="34" height="18" rx="4"/>
+            <rect x="14" y="13" width="30" height="12" rx="2"/>
+            <line x1="29" y1="28" x2="29" y2="40"/>
+            <path d="M29 40 L38 40 L38 56"/>
+            <rect x="34" y="53" width="8" height="5" rx="1"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="about-service-name">Interior &amp; Exterior Painting</h3>
+          <p class="about-service-desc">We offer professional painting services for both the inside and outside of your home or property. Whether you're looking to refresh a single room or give your entire exterior a makeover, we use high-quality paints and precise techniques for a smooth, lasting finish. Our team ensures clean lines, full coverage, and minimal disruption.</p>
+        </div>
+      </div>
+
+      <div class="about-service-row reveal reveal-delay-1">
+        <div class="about-service-icon-wrap">
+          <img src="icon-2.png" alt="Wallpaper hanging" />
+        </div>
+        <div>
+          <h3 class="about-service-name">Wallpaper Hanging</h3>
+          <p class="about-service-desc">Add style and personality to any room with our expert wallpaper hanging service. From feature walls to full-room coverage, we ensure seamless alignment and bubble-free application. We work with all wallpaper types, including textured and patterned designs — delivering a perfect, professional finish every time.</p>
+        </div>
+      </div>
+
+      <div class="about-service-row reveal reveal-delay-2">
+        <div class="about-service-icon-wrap">
+          <svg viewBox="0 0 64 64">
+            <path d="M10 32 Q10 22 18 22 Q26 22 26 30 Q26 36 20 36 Q16 36 16 32 Q16 29 19 29"/>
+            <path d="M54 32 Q54 22 46 22 Q38 22 38 30 Q38 36 44 36 Q48 36 48 32 Q48 29 45 29"/>
+            <path d="M26 32 Q26 38 32 38 Q38 38 38 32"/>
+            <circle cx="32" cy="32" r="3"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="about-service-name">Decorative Finishes</h3>
+          <p class="about-service-desc">Give your walls a unique touch with our range of decorative finishes. We apply techniques like sponging, rag rolling, and textured effects to create custom looks that elevate your space. Ideal for accent walls or special rooms that deserve a standout finish crafted with skill and creativity.</p>
+        </div>
+      </div>
+
+      <div class="about-service-row reveal reveal-delay-3">
+        <div class="about-service-icon-wrap">
+          <img src="icon.png" alt="Woodwork & finishing" />
+        </div>
+        <div>
+          <h3 class="about-service-name">Woodwork &amp; Finishing</h3>
+          <p class="about-service-desc">From skirting boards and architraves to doors and bespoke woodwork, we deliver crisp, clean painted finishes that complete the overall look of any space. Our attention to preparation and priming ensures a durable, professional result that stands the test of time.</p>
+        </div>
+      </div>
+
+      <div class="about-service-row reveal reveal-delay-4">
+        <div class="about-service-icon-wrap">
+          <svg viewBox="0 0 64 64">
+            <path d="M10 28 L36 28 L36 44 L10 44 Q8 44 8 42 L8 30 Q8 28 10 28 Z"/>
+            <path d="M36 32 L48 26 L50 28 L38 36 Z"/>
+            <path d="M18 44 L16 56 L26 56 L28 44"/>
+            <circle cx="52" cy="22" r="2" fill="currentColor" stroke="none"/>
+            <circle cx="56" cy="26" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="56" cy="18" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="60" cy="22" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="about-service-name">Spray Painting</h3>
+          <p class="about-service-desc">Using modern airless spray equipment, we achieve a factory-smooth, even finish across large surfaces, cabinetry, and furniture. Our hybrid approach combines the speed and precision of spray technology with traditional finishing for outstanding results on any scale of project.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUALITY GUARANTEE -->
+  <section class="about-quality">
+    <div class="about-quality-inner">
+      <h2 class="about-quality-title reveal">Our Quality Guarantee</h2>
+      <p class="about-quality-text reveal reveal-delay-1">
+        At Modernus, we are committed to delivering <strong>exceptional craftsmanship and attention to detail</strong> in every project we take on. We use only high-quality materials and professional techniques to ensure a flawless and durable finish.
+      </p>
+      <p class="about-quality-text reveal reveal-delay-2">
+        Your satisfaction is at the heart of what we do — if you're not completely happy, we'll work with you until it's right. That's <strong>the Modernus promise.</strong>
+      </p>
+      <div class="about-quality-promise reveal reveal-delay-3">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--c-bronze);flex-shrink:0"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>
+        Fully insured &bull; Free quotes &bull; No-obligation consultations
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="about-cta">
+    <p class="about-cta-text reveal">
+      Transform your living space into your dream home with Modernus. Share your project details with us today and let's embark on a journey to create a space that truly reflects your style and aspirations.
+    </p>
+    <a href="index.html#contact" class="about-cta-btn reveal reveal-delay-1">Get A Free Estimate</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer" class="sect-anim">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <img src="logo-m.avif" alt="Modernus" class="footer-logo-img" />
+          <p class="footer-desc">Southwest London's trusted painting and decorating specialists. Exceptional craftsmanship and attention to detail on every project since 2009.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title">Services</p>
+          <ul class="footer-links">
+            <li><a href="index.html#services">Interior Painting</a></li>
+            <li><a href="index.html#services">Exterior Painting</a></li>
+            <li><a href="index.html#services">Wallpaper Hanging</a></li>
+            <li><a href="index.html#services">Decorative Finishes</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#testimonials">Reviews</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Contact</p>
+          <ul class="footer-links">
+            <li><a href="mailto:info@modernusdecorationprojects.co.uk">info@modernusdecorationprojects.co.uk</a></li>
+            <li><a href="tel:+447447947665">+44 7447 947665</a></li>
+            <li>31 Ewell Road, SM3 8AU</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2024 Modernus Decoration Projects LTD. Website by <a href="#">MartKam Digital</a>.</p>
+        <p class="footer-copy" style="color:rgba(255,255,255,0.18)">Serving Southwest London</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
