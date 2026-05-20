@@ -176,7 +176,7 @@ ul { list-style: none; }
 .hero-inner {
   position: relative;
   width: 100%; max-width: 1200px;
-  margin: 0 auto; height: 560px; overflow: hidden;
+  margin: 0 auto; height: calc(100vh - var(--nav-h)); min-height: 560px; overflow: hidden;
 }
 .hero-img {
   width: 100%; height: 100%;
@@ -259,6 +259,15 @@ ul { list-style: none; }
   transition: background 0.25s, color 0.25s, transform 0.25s;
 }
 .btn-dark:hover { background: transparent; color: var(--c-dark); transform: translateY(-2px); }
+.btn-light {
+  display: inline-block;
+  padding: 14px 44px;
+  background: var(--c-white); color: var(--c-dark);
+  font-family: var(--ff-body); font-size: 13px; font-weight: 400;
+  letter-spacing: 0.06em; border: 2px solid var(--c-white);
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+.btn-light:hover { background: transparent; color: var(--c-white); transform: translateY(-2px); }
 
 /* ── Services ───────────────────────────────────────────────────────── */
 #services { background: var(--c-white); padding: var(--section-pad) 48px; }

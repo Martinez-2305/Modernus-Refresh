@@ -1,0 +1,445 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Putney Project | Modernus Decoration Projects LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+  <style>
+    .proj-hero {
+      margin-top: var(--nav-h);
+      background: var(--c-dark);
+      padding: 72px 48px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .proj-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 60%, rgba(180,106,44,0.13) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(180,106,44,0.07) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .proj-hero-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+    .proj-breadcrumb-row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px;
+      font-size: 12px; color: rgba(255,255,255,0.4);
+      margin-bottom: 28px; font-family: var(--ff-body);
+    }
+    .proj-breadcrumb-row a { color: var(--c-bronze); transition: opacity 0.2s; }
+    .proj-breadcrumb-row a:hover { opacity: 0.75; }
+    .proj-breadcrumb-row span { color: rgba(255,255,255,0.25); }
+    .proj-hero-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--c-bronze); margin-bottom: 16px;
+    }
+    .proj-hero-label::before {
+      content: ''; display: inline-block;
+      width: 24px; height: 2px; background: var(--c-bronze);
+    }
+    .proj-hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(34px, 5vw, 64px);
+      font-weight: 800; color: var(--c-white);
+      line-height: 1.05; margin-bottom: 24px;
+    }
+    .proj-hero-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .proj-hero-tag {
+      padding: 6px 16px;
+      border: 1px solid rgba(180,106,44,0.4); border-radius: 2px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55);
+      font-family: var(--ff-body);
+    }
+
+    .proj-gallery { background: var(--c-dark); padding: 0 0 64px; }
+    .proj-gallery-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+    .slider-stage {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      background: rgb(10,10,10); overflow: hidden;
+    }
+    .slider-slide {
+      position: absolute; inset: 0; opacity: 0;
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1);
+      pointer-events: none;
+    }
+    .slider-slide.active { opacity: 1; pointer-events: auto; }
+    .slider-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .slider-counter {
+      position: absolute; top: 20px; right: 24px;
+      font-family: var(--ff-head); font-size: 13px; font-weight: 700;
+      color: rgba(255,255,255,0.6); letter-spacing: 0.1em; z-index: 10;
+      background: rgba(0,0,0,0.35); padding: 5px 12px; backdrop-filter: blur(4px);
+    }
+    .slider-counter strong { color: var(--c-white); }
+
+    .slider-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 52px; height: 52px;
+      background: rgba(20,20,20,0.72); border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10; color: var(--c-white);
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .slider-arrow:hover { background: var(--c-bronze); border-color: var(--c-bronze); transform: translateY(-50%) scale(1.06); }
+    .slider-arrow svg { width: 20px; height: 20px; }
+    .slider-prev { left: 20px; }
+    .slider-next { right: 20px; }
+
+    .slider-thumbs {
+      display: flex; gap: 8px; margin-top: 10px;
+      overflow-x: auto; padding-bottom: 4px; scrollbar-width: none;
+    }
+    .slider-thumbs::-webkit-scrollbar { display: none; }
+    .slider-thumb {
+      flex-shrink: 0; width: 100px; height: 68px;
+      overflow: hidden; cursor: pointer;
+      border: 2px solid transparent; opacity: 0.5;
+      transition: opacity 0.25s, border-color 0.25s;
+    }
+    .slider-thumb.active { border-color: var(--c-bronze); opacity: 1; }
+    .slider-thumb:hover { opacity: 0.85; }
+    .slider-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+
+    .slider-dots { display: none; justify-content: center; gap: 8px; margin-top: 18px; }
+    .slider-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.25); cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .slider-dot.active { background: var(--c-bronze); transform: scale(1.3); }
+
+    .proj-details { background: var(--c-white); padding: 88px 48px; }
+    .proj-details-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 360px;
+      gap: 80px; align-items: start;
+    }
+    .proj-details-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--c-bronze); margin-bottom: 18px;
+    }
+    .proj-details-title {
+      font-family: var(--ff-head); font-size: clamp(26px, 3vw, 40px);
+      font-weight: 800; color: var(--c-dark); line-height: 1.1; margin-bottom: 24px;
+    }
+    .proj-details-body { font-size: 15px; line-height: 1.85; color: rgb(90,90,90); font-weight: 300; }
+    .proj-details-body p + p { margin-top: 16px; }
+
+    .proj-specs { background: var(--c-light); padding: 36px; border-top: 3px solid var(--c-bronze); }
+    .proj-specs-title {
+      font-family: var(--ff-head); font-size: 13px; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--c-dark); margin-bottom: 28px;
+    }
+    .proj-spec-row {
+      display: flex; flex-direction: column; gap: 4px;
+      padding: 16px 0; border-bottom: 1px solid var(--c-border);
+    }
+    .proj-spec-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .proj-spec-row:first-of-type { padding-top: 0; }
+    .proj-spec-key { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-muted); }
+    .proj-spec-val { font-size: 15px; font-weight: 400; color: var(--c-dark); }
+
+    .proj-cta {
+      background: var(--c-dark); padding: 72px 48px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .proj-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(180,106,44,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .proj-cta-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--c-bronze); margin-bottom: 14px; display: block;
+    }
+    .proj-cta-title {
+      font-family: var(--ff-head); font-size: clamp(24px, 3vw, 38px);
+      font-weight: 800; color: var(--c-white); margin-bottom: 30px;
+    }
+
+    @media (max-width: 900px) {
+      .proj-hero { padding: 56px 20px 48px; }
+      .proj-gallery-inner { padding: 0 20px; }
+      .proj-details { padding: 60px 20px; }
+      .proj-details-inner { grid-template-columns: 1fr; gap: 40px; }
+      .slider-thumb { width: 80px; height: 54px; }
+      .proj-cta { padding: 56px 20px; }
+    }
+    @media (max-width: 600px) {
+      .proj-hero { padding: 44px 16px 40px; }
+      .proj-gallery-inner { padding: 0 16px; }
+      .proj-details { padding: 48px 16px; }
+      .slider-stage { aspect-ratio: 4/3; }
+      .slider-arrow { width: 40px; height: 40px; }
+      .slider-arrow svg { width: 16px; height: 16px; }
+      .slider-prev { left: 10px; }
+      .slider-next { right: 10px; }
+      .slider-thumbs { display: none; }
+      .slider-dots { display: flex; }
+      .proj-cta { padding: 48px 16px; }
+      .slider-counter { font-size: 11px; padding: 4px 8px; top: 10px; right: 10px; }
+      .proj-specs { padding: 24px 20px; }
+      .proj-hero-tag { font-size: 10px; padding: 5px 10px; }
+      .proj-details-title { margin-bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="nav-logo">
+        <img src="../../logo-m.avif" alt="Modernus" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/about.html">About</a></li>
+        <li><a href="../portfolio.html" style="color:var(--c-bronze)">Portfolio</a></li>
+        <li><a href="../../index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-panel">
+      <ul>
+        <li><a href="../../index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="../../about/about.html" class="mobile-nav-link">About</a></li>
+        <li><a href="../portfolio.html" class="mobile-nav-link">Portfolio</a></li>
+        <li><a href="../../index.html#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <a href="../../index.html#contact" class="mobile-nav-link mobile-cta">Get a Free Quote</a>
+    </div>
+  </div>
+
+  <!-- PROJECT HERO -->
+  <section class="proj-hero">
+    <div class="proj-hero-inner">
+      <div class="proj-breadcrumb-row">
+        <a href="../../index.html">Home</a>
+        <span>›</span>
+        <a href="../portfolio.html">Portfolio</a>
+        <span>›</span>
+        Putney Project
+      </div>
+      <p class="proj-hero-label reveal">Wallpaper Finishes</p>
+      <h1 class="proj-hero-title reveal reveal-delay-1">Putney Project</h1>
+      <div class="proj-hero-tags reveal reveal-delay-2">
+        <span class="proj-hero-tag">Wallpaper Hanging</span>
+        <span class="proj-hero-tag">Putney, SW15</span>
+        <span class="proj-hero-tag">Residential</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SLIDER -->
+  <section class="proj-gallery">
+    <div class="proj-gallery-inner">
+
+      <div class="slider-stage" id="slider">
+        <div class="slider-slide active">
+          <img src="wallpaper-2.jpg" alt="Putney Project — view 1" />
+        </div>
+        <div class="slider-slide">
+          <img src="https://placehold.co/1600x900/1a1a1a/b46a2c?text=Image+2" alt="Putney Project — view 2" />
+        </div>
+        <div class="slider-slide">
+          <img src="https://placehold.co/1600x900/1a1a1a/b46a2c?text=Image+3" alt="Putney Project — view 3" />
+        </div>
+        <div class="slider-slide">
+          <img src="https://placehold.co/1600x900/1a1a1a/b46a2c?text=Image+4" alt="Putney Project — view 4" />
+        </div>
+        <div class="slider-slide">
+          <img src="https://placehold.co/1600x900/1a1a1a/b46a2c?text=Image+5" alt="Putney Project — view 5" />
+        </div>
+
+        <div class="slider-counter">
+          <strong id="slide-current">01</strong> / <span id="slide-total">05</span>
+        </div>
+
+        <button class="slider-arrow slider-prev" id="slider-prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="slider-arrow slider-next" id="slider-next" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="slider-thumbs" id="slider-thumbs">
+        <div class="slider-thumb active">
+          <img src="wallpaper-2.jpg" alt="Thumb 1" />
+        </div>
+        <div class="slider-thumb">
+          <img src="https://placehold.co/200x136/1a1a1a/b46a2c?text=2" alt="Thumb 2" />
+        </div>
+        <div class="slider-thumb">
+          <img src="https://placehold.co/200x136/1a1a1a/b46a2c?text=3" alt="Thumb 3" />
+        </div>
+        <div class="slider-thumb">
+          <img src="https://placehold.co/200x136/1a1a1a/b46a2c?text=4" alt="Thumb 4" />
+        </div>
+        <div class="slider-thumb">
+          <img src="https://placehold.co/200x136/1a1a1a/b46a2c?text=5" alt="Thumb 5" />
+        </div>
+      </div>
+
+      <div class="slider-dots" id="slider-dots">
+        <div class="slider-dot active"></div>
+        <div class="slider-dot"></div>
+        <div class="slider-dot"></div>
+        <div class="slider-dot"></div>
+        <div class="slider-dot"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECT DETAILS -->
+  <section class="proj-details sect-anim">
+    <div class="proj-details-inner">
+      <div>
+        <p class="proj-details-label reveal">About This Project</p>
+        <h2 class="proj-details-title reveal reveal-delay-1">A full wallpaper installation across a family home in Putney</h2>
+        <div class="proj-details-body reveal reveal-delay-2">
+          <p>This project covered the wallpaper hanging throughout a family home in Putney, SW15. Our team carried out full surface preparation before fitting a combination of patterned and textured wallpapers, carefully matching repeat patterns across every drop for a seamless, professional result.</p>
+          <p>From feature walls to full room installations, the client wanted a home that felt distinctly personal and elevated. We delivered a finish that exceeded expectations — clean edges, tight seams, and not a bubble in sight.</p>
+        </div>
+      </div>
+      <div class="proj-specs reveal">
+        <p class="proj-specs-title">Project Details</p>
+        <div class="proj-spec-row">
+          <span class="proj-spec-key">Location</span>
+          <span class="proj-spec-val">Putney, London SW15</span>
+        </div>
+        <div class="proj-spec-row">
+          <span class="proj-spec-key">Services</span>
+          <span class="proj-spec-val">Wallpaper Hanging & Finishing</span>
+        </div>
+        <div class="proj-spec-row">
+          <span class="proj-spec-key">Duration</span>
+          <span class="proj-spec-val">11 Weeks</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="proj-cta sect-anim">
+    <span class="proj-cta-label reveal">Get In Touch</span>
+    <h2 class="proj-cta-title reveal reveal-delay-1">Like what you see? Let's discuss your project.</h2>
+    <a href="../../index.html#contact" class="btn-light reveal reveal-delay-2">Get a Free Quote</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer" class="sect-anim">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <img src="../../logo-m.avif" alt="Modernus" class="footer-logo-img" />
+          <p class="footer-desc">Southwest London's trusted painting and decorating specialists. Exceptional craftsmanship and attention to detail on every project since 2009.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title">Services</p>
+          <ul class="footer-links">
+            <li><a href="../../index.html#services">Interior Painting</a></li>
+            <li><a href="../../index.html#services">Exterior Painting</a></li>
+            <li><a href="../../index.html#services">Wallpaper Hanging</a></li>
+            <li><a href="../../index.html#services">Decorative Finishes</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-links">
+            <li><a href="../../about/about.html">About Us</a></li>
+            <li><a href="../portfolio.html">Portfolio</a></li>
+            <li><a href="../../index.html#testimonials">Reviews</a></li>
+            <li><a href="../../index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Contact</p>
+          <ul class="footer-links">
+            <li><a href="mailto:info@modernusdecorationprojects.co.uk">info@modernusdecorationprojects.co.uk</a></li>
+            <li><a href="tel:+447447947665">+44 7447 947665</a></li>
+            <li>31 Ewell Road, SM3 8AU</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2024 Modernus Decoration Projects LTD. Website by <a href="#">MartKam Digital</a>.</p>
+        <p class="footer-copy" style="color:rgba(255,255,255,0.18)">Serving Southwest London</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script>
+    const slides  = document.querySelectorAll('.slider-slide');
+    const thumbs  = document.querySelectorAll('.slider-thumb');
+    const dots    = document.querySelectorAll('.slider-dot');
+    const counter = document.getElementById('slide-current');
+    const total   = document.getElementById('slide-total');
+    let current   = 0;
+
+    total.textContent = String(slides.length).padStart(2, '0');
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      thumbs[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      thumbs[current].classList.add('active');
+      dots[current].classList.add('active');
+      counter.textContent = String(current + 1).padStart(2, '0');
+    }
+
+    document.getElementById('slider-prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('slider-next').addEventListener('click', () => goTo(current + 1));
+    thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    const stage = document.getElementById('slider');
+    let touchStartX = 0;
+    stage.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+  </script>
+</body>
+</html>
+
+
+
