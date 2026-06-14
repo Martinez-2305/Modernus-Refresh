@@ -12,6 +12,12 @@ const corsHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const esc = (s: string) => String(s).replace(/[&<>"']/g, c => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+}[c]!))
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -28,6 +34,12 @@ Deno.serve(async (req) => {
 
     if (!name || !email || !message) {
       return new Response(JSON.stringify({ error: 'Name, email and message are required.' }), {
+        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+
+    if (!EMAIL_RE.test(email)) {
+      return new Response(JSON.stringify({ error: 'Please provide a valid email address.' }), {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
     }
@@ -51,7 +63,7 @@ Deno.serve(async (req) => {
         from: `Modernus Website <${FROM_EMAIL}>`,
         to: [TO_EMAIL],
         reply_to: email,
-        subject: `New enquiry from ${name}`,
+        subject: `New enquiry from ${esc(name)}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a">
             <div style="background:#1a1a1a;padding:28px 32px">
@@ -62,19 +74,19 @@ Deno.serve(async (req) => {
               <table style="width:100%;border-collapse:collapse">
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;width:100px;color:#888;font-size:12px;text-transform:uppercase;letter-spacing:0.1em">Name</td>
-                  <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;font-size:15px">${name}</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;font-size:15px">${esc(name)}</td>
                 </tr>
                 <tr>
                   <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;color:#888;font-size:12px;text-transform:uppercase;letter-spacing:0.1em">Email</td>
-                  <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;font-size:15px"><a href="mailto:${email}" style="color:#b46a2c">${email}</a></td>
+                  <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;font-size:15px"><a href="mailto:${esc(email)}" style="color:#b46a2c">${esc(email)}</a></td>
                 </tr>
                 ${phone ? `<tr>
                   <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;color:#888;font-size:12px;text-transform:uppercase;letter-spacing:0.1em">Phone</td>
-                  <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;font-size:15px">${phone}</td>
+                  <td style="padding:10px 0;border-bottom:1px solid #e8e0d4;font-size:15px">${esc(phone)}</td>
                 </tr>` : ''}
                 <tr>
                   <td style="padding:12px 0;vertical-align:top;color:#888;font-size:12px;text-transform:uppercase;letter-spacing:0.1em">Message</td>
-                  <td style="padding:12px 0;font-size:15px;line-height:1.7;white-space:pre-wrap">${message}</td>
+                  <td style="padding:12px 0;font-size:15px;line-height:1.7;white-space:pre-wrap">${esc(message)}</td>
                 </tr>
               </table>
             </div>
