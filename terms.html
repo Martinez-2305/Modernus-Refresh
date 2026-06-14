@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service | Modernus Decoration Projects LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .terms-hero {
+      margin-top: var(--nav-h);
+      background: var(--c-dark);
+      padding: 72px 48px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .terms-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 25% 60%, rgba(180,106,44,0.11) 0%, transparent 60%),
+                  radial-gradient(ellipse at 75% 30%, rgba(180,106,44,0.07) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .terms-hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .terms-hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-bronze);
+      margin-bottom: 16px;
+    }
+    .terms-hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 2px;
+      background: var(--c-bronze);
+    }
+    .terms-hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 800;
+      color: var(--c-white);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .terms-hero-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+      font-family: var(--ff-body);
+    }
+
+    .terms-breadcrumb {
+      background: var(--c-light);
+      padding: 14px 48px;
+      font-size: 13px;
+      color: var(--c-muted);
+    }
+    .terms-breadcrumb a { color: var(--c-bronze); }
+    .terms-breadcrumb a:hover { text-decoration: underline; }
+    .terms-breadcrumb span { margin: 0 8px; }
+
+    /* ── Content layout ── */
+    .terms-body {
+      background: var(--c-white);
+      padding: 80px 48px;
+    }
+    .terms-body-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Sticky sidebar nav */
+    .terms-nav {
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
+    }
+    .terms-nav-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 16px;
+    }
+    .terms-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .terms-nav-list a {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--c-muted);
+      padding: 7px 12px;
+      border-left: 2px solid var(--c-border);
+      transition: color 0.2s, border-color 0.2s, padding-left 0.2s;
+      line-height: 1.4;
+    }
+    .terms-nav-list a:hover {
+      color: var(--c-bronze);
+      border-color: var(--c-bronze);
+      padding-left: 16px;
+    }
+
+    /* Content */
+    .terms-content section {
+      margin-bottom: 56px;
+      scroll-margin-top: calc(var(--nav-h) + 32px);
+    }
+    .terms-content section:last-child { margin-bottom: 0; }
+
+    .terms-section-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-bronze);
+      margin-bottom: 10px;
+    }
+    .terms-section-title {
+      font-family: var(--ff-head);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--c-dark);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--c-border);
+    }
+    .terms-content p {
+      font-size: 14.5px;
+      line-height: 1.85;
+      color: rgb(80,80,80);
+      font-weight: 300;
+      margin-bottom: 14px;
+    }
+    .terms-content p:last-child { margin-bottom: 0; }
+    .terms-content ul {
+      margin: 12px 0 14px 0;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .terms-content ul li {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: rgb(80,80,80);
+      font-weight: 300;
+      padding-left: 18px;
+      position: relative;
+    }
+    .terms-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px; height: 1.5px;
+      background: var(--c-bronze);
+    }
+    .terms-content strong {
+      color: var(--c-dark);
+      font-weight: 700;
+    }
+    .terms-highlight {
+      background: var(--c-light);
+      border-left: 3px solid var(--c-bronze);
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: rgb(80,80,80);
+      font-weight: 300;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .terms-hero { padding: 56px 20px 48px; }
+      .terms-breadcrumb { padding: 12px 20px; }
+      .terms-body { padding: 56px 20px; }
+      .terms-body-inner { grid-template-columns: 1fr; gap: 0; }
+      .terms-nav { display: none; }
+    }
+    @media (max-width: 600px) {
+      .terms-hero { padding: 44px 16px 40px; }
+      .terms-body { padding: 44px 16px; }
+      .terms-section-title { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo-m.avif" alt="Modernus" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about/about.html">About</a></li>
+        <li><a href="portfolio/portfolio.html">Portfolio</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-panel">
+      <ul>
+        <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="about/about.html" class="mobile-nav-link">About</a></li>
+        <li><a href="portfolio/portfolio.html" class="mobile-nav-link">Portfolio</a></li>
+        <li><a href="index.html#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <a href="index.html#contact" class="mobile-nav-link mobile-cta">Get a Free Quote</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="terms-hero">
+    <div class="terms-hero-inner">
+      <p class="terms-hero-label reveal">Legal</p>
+      <h1 class="terms-hero-title reveal reveal-delay-1">Terms of Service</h1>
+      <p class="terms-hero-meta reveal reveal-delay-2">Last updated: May 2025 &nbsp;·&nbsp; Modernus Decoration Projects LTD</p>
+    </div>
+  </section>
+
+  <!-- BREADCRUMB -->
+  <div class="terms-breadcrumb">
+    <a href="index.html">Home</a><span>›</span>Terms of Service
+  </div>
+
+  <!-- CONTENT -->
+  <div class="terms-body">
+    <div class="terms-body-inner">
+
+      <!-- Sidebar nav -->
+      <nav class="terms-nav" aria-label="Page sections">
+        <p class="terms-nav-title">Contents</p>
+        <ul class="terms-nav-list">
+          <li><a href="#introduction">1. Introduction</a></li>
+          <li><a href="#services">2. Our Services</a></li>
+          <li><a href="#quotations">3. Quotations & Estimates</a></li>
+          <li><a href="#payment">4. Payment Terms</a></li>
+          <li><a href="#cancellation">5. Cancellations</a></li>
+          <li><a href="#responsibilities">6. Your Responsibilities</a></li>
+          <li><a href="#liability">7. Our Liability</a></li>
+          <li><a href="#warranty">8. Warranty & Guarantee</a></li>
+          <li><a href="#privacy">9. Privacy & Data</a></li>
+          <li><a href="#governing">10. Governing Law</a></li>
+          <li><a href="#contact">11. Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main content -->
+      <div class="terms-content">
+
+        <section id="introduction">
+          <p class="terms-section-num">01</p>
+          <h2 class="terms-section-title">Introduction</h2>
+          <p>These Terms of Service ("Terms") govern your use of the services provided by <strong>Modernus Decoration Projects LTD</strong>, a company registered in England and Wales ("we", "us", "our"). By engaging our services, requesting a quotation, or entering into a contract with us, you agree to be bound by these Terms.</p>
+          <p>Please read these Terms carefully before proceeding. If you do not agree with any part of these Terms, you should not engage our services. These Terms apply to all residential and commercial clients unless a separate written agreement has been signed between both parties.</p>
+          <div class="terms-highlight">
+            Our registered address is: 31 Ewell Road, SM3 8AU, United Kingdom. Company registration details are available upon request.
+          </div>
+        </section>
+
+        <section id="services">
+          <p class="terms-section-num">02</p>
+          <h2 class="terms-section-title">Our Services</h2>
+          <p>Modernus Decoration Projects LTD provides professional painting and decorating services including, but not limited to:</p>
+          <ul>
+            <li>Interior and exterior painting and decorating</li>
+            <li>Wallpaper hanging and removal</li>
+            <li>Woodwork finishing and preparation</li>
+            <li>Spray painting and specialist decorative finishes</li>
+            <li>Surface preparation including filling, sanding, and priming</li>
+          </ul>
+          <p>We reserve the right to refuse or decline any project that we deem unsuitable, unsafe, or outside the scope of our expertise. All services are subject to a formal agreement or acceptance of a written quotation.</p>
+        </section>
+
+        <section id="quotations">
+          <p class="terms-section-num">03</p>
+          <h2 class="terms-section-title">Quotations & Estimates</h2>
+          <p>All quotations provided by Modernus Decoration Projects LTD are valid for <strong>30 days</strong> from the date of issue unless otherwise stated in writing. A quotation does not constitute a binding contract until it has been accepted by you in writing (including by email) and confirmed by us.</p>
+          <p>Our quotations are based on information available at the time of survey or site visit. Should additional work be required beyond the agreed scope — for example, due to unforeseen surface defects, substrate failure, or changes to the specification — we will notify you promptly and provide a revised quotation before proceeding.</p>
+          <ul>
+            <li>Quotations include labour and standard materials unless stated otherwise</li>
+            <li>Premium or client-specified materials may be subject to additional cost</li>
+            <li>Access, scaffolding, or specialist equipment will be quoted separately where required</li>
+            <li>VAT will be applied where applicable and shown clearly on all invoices</li>
+          </ul>
+        </section>
+
+        <section id="payment">
+          <p class="terms-section-num">04</p>
+          <h2 class="terms-section-title">Payment Terms</h2>
+          <p>Unless otherwise agreed in writing, the following payment terms apply to all projects:</p>
+          <ul>
+            <li><strong>Deposit:</strong> A deposit of up to 30% of the total contract value may be required prior to commencement of works, particularly for larger projects or where materials must be ordered in advance</li>
+            <li><strong>Staged payments:</strong> For projects exceeding 2 weeks in duration, interim payments may be agreed at the outset and invoiced at agreed milestones</li>
+            <li><strong>Final payment:</strong> The remaining balance is due upon practical completion of the works and before our team vacates the site</li>
+            <li><strong>Payment methods:</strong> We accept bank transfer (BACS), cash, and card payments. Payment details will be provided on each invoice</li>
+          </ul>
+          <p>Invoices are payable within <strong>7 days</strong> of the invoice date unless alternative terms have been agreed in writing. We reserve the right to charge interest on overdue payments at a rate of 8% per annum above the Bank of England base rate, in accordance with the Late Payment of Commercial Debts (Interest) Act 1998.</p>
+          <div class="terms-highlight">
+            Failure to make payment by the agreed date may result in work being suspended until outstanding balances are settled. We shall not be liable for any losses arising from such suspension.
+          </div>
+        </section>
+
+        <section id="cancellation">
+          <p class="terms-section-num">05</p>
+          <h2 class="terms-section-title">Cancellations & Postponements</h2>
+          <p>We understand that circumstances can change. The following cancellation policy applies:</p>
+          <ul>
+            <li><strong>More than 14 days' notice:</strong> Cancellation without charge, subject to the return of any unused materials that have not been specifically ordered for your project</li>
+            <li><strong>7–14 days' notice:</strong> A cancellation fee of up to 15% of the total contract value may be applied to cover loss of income and resource allocation</li>
+            <li><strong>Less than 7 days' notice:</strong> A cancellation fee of up to 30% of the total contract value may be applied</li>
+            <li><strong>Materials ordered:</strong> Any materials specifically ordered for your project that cannot be returned will be charged at cost</li>
+          </ul>
+          <p>Postponements requested with less than 72 hours' notice may incur a rescheduling fee. We will always endeavour to accommodate changes wherever possible and will communicate clearly regarding any charges that apply.</p>
+        </section>
+
+        <section id="responsibilities">
+          <p class="terms-section-num">06</p>
+          <h2 class="terms-section-title">Your Responsibilities</h2>
+          <p>To ensure works can proceed safely and efficiently, you agree to:</p>
+          <ul>
+            <li>Provide safe and reasonable access to the property and all areas within scope</li>
+            <li>Ensure the property is free from hazards including asbestos, lead paint, or other dangerous materials (professional surveys must be completed prior to works if applicable)</li>
+            <li>Remove or protect personal belongings, furniture, and valuables from the working areas prior to commencement — we are not liable for items left in working areas</li>
+            <li>Ensure adequate utilities (electricity, water, and welfare facilities) are available for our team during the works</li>
+            <li>Obtain any necessary permissions, planning consents, or listed building consents before work begins</li>
+            <li>Notify us of any known defects, structural issues, or concerns relating to the property</li>
+          </ul>
+          <p>Delays caused by failure to meet these responsibilities may result in additional charges at our standard day rate.</p>
+        </section>
+
+        <section id="liability">
+          <p class="terms-section-num">07</p>
+          <h2 class="terms-section-title">Our Liability</h2>
+          <p>Modernus Decoration Projects LTD carries public liability insurance. We take all reasonable care in the execution of our work. However, our liability is limited as follows:</p>
+          <ul>
+            <li>We are not liable for pre-existing defects to surfaces, substrates, or structures that were not disclosed to us prior to the commencement of works</li>
+            <li>We are not liable for damage caused by movement, settlement, or structural issues beyond our reasonable control</li>
+            <li>We are not liable for colour variation between paint batches, or between painted surfaces and colour swatches, beyond industry-standard tolerances</li>
+            <li>Our total liability for any claim arising out of or in connection with these Terms shall not exceed the total value of the contract under which the claim arises</li>
+          </ul>
+          <p>Nothing in these Terms limits our liability for death or personal injury caused by our negligence, fraud, or any other liability that cannot lawfully be excluded under English law.</p>
+        </section>
+
+        <section id="warranty">
+          <p class="terms-section-num">08</p>
+          <h2 class="terms-section-title">Warranty & Guarantee</h2>
+          <p>We stand behind the quality of our workmanship. Subject to the conditions below, we provide a <strong>12-month workmanship guarantee</strong> on all completed projects from the date of practical completion.</p>
+          <p>This guarantee covers defects in the application of materials attributable to our workmanship. It does not cover:</p>
+          <ul>
+            <li>Damage resulting from accident, misuse, or unauthorised alteration</li>
+            <li>Natural movement, shrinkage, or settlement of the building structure</li>
+            <li>Deterioration caused by abnormal conditions including damp, condensation, or flooding</li>
+            <li>Fair wear and tear consistent with the intended use of the surface</li>
+            <li>Defects arising from materials supplied or specified by the client</li>
+          </ul>
+          <p>To make a claim under this guarantee, please contact us in writing within the guarantee period. We will assess the issue and, if covered, remedy the defect at no additional cost to you.</p>
+        </section>
+
+        <section id="privacy">
+          <p class="terms-section-num">09</p>
+          <h2 class="terms-section-title">Privacy & Data Protection</h2>
+          <p>Modernus Decoration Projects LTD is committed to protecting your personal data in accordance with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.</p>
+          <p>We collect and process personal information (including your name, address, email, and telephone number) for the purpose of providing our services, issuing quotations and invoices, and communicating with you about your project. We will never sell or share your personal data with third parties for marketing purposes.</p>
+          <ul>
+            <li>Your data is stored securely and retained only for as long as necessary</li>
+            <li>You have the right to access, correct, or request deletion of your personal data at any time</li>
+            <li>To exercise your data rights, please contact us at <a href="mailto:info@modernusdecorationprojects.co.uk" style="color:var(--c-bronze)">info@modernusdecorationprojects.co.uk</a></li>
+          </ul>
+        </section>
+
+        <section id="governing">
+          <p class="terms-section-num">10</p>
+          <h2 class="terms-section-title">Governing Law</h2>
+          <p>These Terms and any dispute or claim arising out of or in connection with them (including non-contractual disputes or claims) shall be governed by and construed in accordance with the laws of <strong>England and Wales</strong>.</p>
+          <p>Both parties agree to submit to the exclusive jurisdiction of the courts of England and Wales in relation to any dispute arising under or in connection with these Terms. We will always attempt to resolve disputes amicably before resorting to formal legal proceedings.</p>
+          <p>These Terms constitute the entire agreement between us in relation to the services provided and supersede all previous agreements, representations, or understandings between the parties.</p>
+        </section>
+
+        <section id="contact">
+          <p class="terms-section-num">11</p>
+          <h2 class="terms-section-title">Contact Us</h2>
+          <p>If you have any questions about these Terms of Service or wish to raise a concern, please contact us using the details below:</p>
+          <ul>
+            <li><strong>Email:</strong> <a href="mailto:info@modernusdecorationprojects.co.uk" style="color:var(--c-bronze)">info@modernusdecorationprojects.co.uk</a></li>
+            <li><strong>Telephone:</strong> <a href="tel:+447447947665" style="color:var(--c-bronze)">+44 7447 947665</a></li>
+            <li><strong>Address:</strong> 31 Ewell Road, SM3 8AU, United Kingdom</li>
+          </ul>
+          <p>We aim to respond to all enquiries within 2 working days. These Terms were last reviewed and updated in May 2025.</p>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="footer" class="sect-anim">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <img src="logo-m.avif" alt="Modernus" class="footer-logo-img" />
+          <p class="footer-desc">Southwest London's trusted painting and decorating specialists. Exceptional craftsmanship and attention to detail on every project since 2009.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title">Services</p>
+          <ul class="footer-links">
+            <li><a href="index.html#services">Interior Painting</a></li>
+            <li><a href="index.html#services">Exterior Painting</a></li>
+            <li><a href="index.html#services">Wallpaper Hanging</a></li>
+            <li><a href="index.html#services">Decorative Finishes</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-links">
+            <li><a href="about/about.html">About Us</a></li>
+            <li><a href="portfolio/portfolio.html">Portfolio</a></li>
+            <li><a href="index.html#testimonials">Reviews</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Contact</p>
+          <ul class="footer-links">
+            <li><a href="mailto:info@modernusdecorationprojects.co.uk">info@modernusdecorationprojects.co.uk</a></li>
+            <li><a href="tel:+447447947665">+44 7447 947665</a></li>
+            <li>31 Ewell Road, SM3 8AU</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2024 Modernus Decoration Projects LTD. Website by <a href="#">MartKam Digital</a>. <a href="terms.html" style="color:rgba(255,255,255,0.45); margin-left:12px;">Terms of Service</a></p>
+        <p class="footer-copy" style="color:rgba(255,255,255,0.18)">Serving Southwest London</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

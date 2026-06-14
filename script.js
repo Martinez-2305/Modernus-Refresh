@@ -52,22 +52,74 @@ window.addEventListener('scroll', updateAboutReveal, { passive: true });
 updateAboutReveal();
 
 /* ── Contact form submit ─────────────────────────────────────────────── */
+const EDGE_FN_URL = 'https://gzjluhlajfwikfotljlg.supabase.co/functions/v1/contact';
+
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
+  contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = this.querySelector('.form-submit');
-    btn.textContent = '✓ Message Sent!';
-    btn.style.background = 'rgb(60,140,60)';
-    btn.style.borderColor = 'rgb(60,140,60)';
+    const btn  = this.querySelector('.form-submit');
+    const note = this.querySelector('.form-note');
+
+    const firstName = (document.getElementById('f-name')?.value || '').trim();
+    const lastName  = (document.getElementById('f-last')?.value || '').trim();
+    const email     = (document.getElementById('f-email')?.value || '').trim();
+    const phone     = (document.getElementById('f-phone')?.value || '').trim();
+    const address   = (document.getElementById('f-address')?.value || '').trim();
+    const subject   = (document.getElementById('f-subject')?.value || '').trim();
+    const message   = (document.getElementById('f-msg')?.value || '').trim();
+
+    if (!firstName || !email || !message) {
+      note.textContent = 'Please fill in your name, email and message.';
+      note.style.color = '#c0392b';
+      return;
+    }
+
+    btn.textContent = 'Sending…';
     btn.disabled = true;
-    setTimeout(() => {
+
+    try {
+      const res = await fetch(EDGE_FN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: [firstName, lastName].filter(Boolean).join(' '),
+          email,
+          phone: phone || undefined,
+          message: [
+            subject ? `Subject: ${subject}` : '',
+            address ? `Address: ${address}` : '',
+            message,
+          ].filter(Boolean).join('\n\n'),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        btn.textContent = '✓ Message Sent!';
+        btn.style.background = 'rgb(60,140,60)';
+        btn.style.borderColor = 'rgb(60,140,60)';
+        note.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
+        note.style.color = 'rgb(60,140,60)';
+        this.reset();
+        setTimeout(() => {
+          btn.textContent = 'Send Message';
+          btn.style.background = '';
+          btn.style.borderColor = '';
+          btn.disabled = false;
+          note.textContent = 'We respond within 24 hours. All quotes are free & no-obligation.';
+          note.style.color = '';
+        }, 5000);
+      } else {
+        throw new Error(data.error || 'Unknown error');
+      }
+    } catch (err) {
       btn.textContent = 'Send Message';
-      btn.style.background = '';
-      btn.style.borderColor = '';
       btn.disabled = false;
-      this.reset();
-    }, 3500);
+      note.textContent = 'Something went wrong. Please email us directly at info@modernusdecorationprojects.co.uk';
+      note.style.color = '#c0392b';
+    }
   });
 }
 

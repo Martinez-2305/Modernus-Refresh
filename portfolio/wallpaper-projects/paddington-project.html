@@ -61,7 +61,7 @@
     .proj-gallery-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
 
     .slider-stage {
-      position: relative; width: 100%; aspect-ratio: 16/9;
+      position: relative; width: 100%; aspect-ratio: 16/7;
       background: rgb(10,10,10); overflow: hidden;
     }
     .slider-slide {
@@ -70,7 +70,69 @@
       pointer-events: none;
     }
     .slider-slide.active { opacity: 1; pointer-events: auto; }
-    .slider-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slider-slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      cursor: zoom-in;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(0,0,0,0.96);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.open { opacity: 1; pointer-events: auto; }
+    .lightbox-img {
+      max-width: 92vw; max-height: 92vh;
+      object-fit: contain; display: block;
+      transform: scale(0.96);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+      user-select: none;
+    }
+    .lightbox.open .lightbox-img { transform: scale(1); }
+    .lightbox-close {
+      position: fixed; top: 24px; right: 28px;
+      width: 44px; height: 44px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: var(--c-bronze); border-color: var(--c-bronze); }
+    .lightbox-close svg { width: 20px; height: 20px; }
+    .lightbox-arrow {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 52px; height: 52px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(20,20,20,0.72); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; transition: background 0.2s, border-color 0.2s;
+    }
+    .lightbox-arrow:hover { background: var(--c-bronze); border-color: var(--c-bronze); }
+    .lightbox-arrow svg { width: 22px; height: 22px; }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+    .lightbox-counter {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      font-family: var(--ff-head); font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; color: rgba(255,255,255,0.5);
+    }
+    .lightbox-counter strong { color: #fff; }
+
+    .slider-expand-hint {
+      position: absolute; bottom: 18px; left: 18px; z-index: 10;
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 6px 12px 6px 9px;
+      color: rgba(255,255,255,0.75);
+      font-family: var(--ff-body); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      pointer-events: none;
+      opacity: 0; animation: hint-fade 0.5s ease 1.2s forwards;
+    }
+    .slider-expand-hint svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.8; }
+    @keyframes hint-fade { to { opacity: 1; } }
 
     .slider-counter {
       position: absolute; top: 20px; right: 24px;
@@ -180,6 +242,9 @@
       .proj-details { padding: 48px 16px; }
       .slider-stage { aspect-ratio: 4/3; }
       .slider-arrow { width: 40px; height: 40px; }
+      .lightbox-arrow { width: 40px; height: 40px; }
+      .lightbox-prev { left: 8px; }
+      .lightbox-next { right: 8px; }
       .slider-arrow svg { width: 16px; height: 16px; }
       .slider-prev { left: 10px; }
       .slider-next { right: 10px; }
@@ -252,19 +317,27 @@
 
       <div class="slider-stage" id="slider">
         <div class="slider-slide active">
-          <img src="Paddington.jpg" alt="Paddington Project — view 1" />
+          <img src="wallpapers-6.jpg" alt="Paddington Project — view 1" />
         </div>
         <div class="slider-slide">
-          <img src="https://placehold.co/1600x900/1a1a1a/b46a2c?text=Image+2" alt="Paddington Project — view 2" />
+          <img src="wallpapers-7.jpg" alt="Paddington Project — view 2" />
         </div>
         <div class="slider-slide">
-          <img src="https://placehold.co/1600x900/1a1a1a/b46a2c?text=Image+3" alt="Paddington Project — view 3" />
+          <img src="wallpapers-8.jpg" alt="Paddington Project — view 3" />
         </div>
         <div class="slider-slide">
-          <img src="https://placehold.co/1600x900/1a1a1a/b46a2c?text=Image+4" alt="Paddington Project — view 4" />
+          <img src="wallpapers-9.jpg" alt="Paddington Project — view 4" />
         </div>
         <div class="slider-slide">
-          <img src="https://placehold.co/1600x900/1a1a1a/b46a2c?text=Image+5" alt="Paddington Project — view 5" />
+          <img src="wallpapers-10.jpg" alt="Paddington Project — view 5" />
+        </div>
+
+        <div class="slider-expand-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+            <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+          Click to expand
         </div>
 
         <div class="slider-counter">
@@ -285,19 +358,19 @@
 
       <div class="slider-thumbs" id="slider-thumbs">
         <div class="slider-thumb active">
-          <img src="Paddington.jpg" alt="Thumb 1" />
+          <img src="wallpapers-6.jpg" alt="Thumb 1" />
         </div>
         <div class="slider-thumb">
-          <img src="https://placehold.co/200x136/1a1a1a/b46a2c?text=2" alt="Thumb 2" />
+          <img src="wallpapers-7.jpg" alt="Thumb 2" />
         </div>
         <div class="slider-thumb">
-          <img src="https://placehold.co/200x136/1a1a1a/b46a2c?text=3" alt="Thumb 3" />
+          <img src="wallpapers-8.jpg" alt="Thumb 3" />
         </div>
         <div class="slider-thumb">
-          <img src="https://placehold.co/200x136/1a1a1a/b46a2c?text=4" alt="Thumb 4" />
+          <img src="wallpapers-9.jpg" alt="Thumb 4" />
         </div>
         <div class="slider-thumb">
-          <img src="https://placehold.co/200x136/1a1a1a/b46a2c?text=5" alt="Thumb 5" />
+          <img src="wallpapers-10.jpg" alt="Thumb 5" />
         </div>
       </div>
 
@@ -392,11 +465,28 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2024 Modernus Decoration Projects LTD. Website by <a href="#">MartKam Digital</a>.</p>
+        <p class="footer-copy">&copy; 2024 Modernus Decoration Projects LTD. Website by <a href="#">MartKam Digital</a>. <a href="../../terms.html" style="color:rgba(255,255,255,0.45); margin-left:12px;">Terms of Service</a> <a href="../../privacy.html" style="color:rgba(255,255,255,0.45); margin-left:12px;">Privacy Policy</a></p>
         <p class="footer-copy" style="color:rgba(255,255,255,0.18)">Serving Southwest London</p>
       </div>
     </div>
   </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <button class="lightbox-arrow lightbox-prev" id="lb-prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="lightbox-arrow lightbox-next" id="lb-next" aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <p class="lightbox-counter"><strong id="lb-current">01</strong> / <span id="lb-total">05</span></p>
+  </div>
 
   <script src="../../script.js"></script>
   <script>
@@ -426,6 +516,7 @@
     dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
 
     document.addEventListener('keydown', e => {
+      if (lb.classList.contains('open')) return;
       if (e.key === 'ArrowLeft')  goTo(current - 1);
       if (e.key === 'ArrowRight') goTo(current + 1);
     });
@@ -437,9 +528,58 @@
       const diff = touchStartX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
     });
+
+    // LIGHTBOX
+    const lb        = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lightbox-img');
+    const lbCurrent = document.getElementById('lb-current');
+    const lbTotal   = document.getElementById('lb-total');
+    const imgSrcs   = Array.from(slides).map(s => s.querySelector('img').src);
+    let lbIndex = 0;
+
+    lbTotal.textContent = String(imgSrcs.length).padStart(2, '0');
+
+    function lbOpen(index) {
+      lbIndex = index;
+      lbImg.src = imgSrcs[lbIndex];
+      lbCurrent.textContent = String(lbIndex + 1).padStart(2, '0');
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function lbClose() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function lbNav(dir) {
+      lbIndex = (lbIndex + dir + imgSrcs.length) % imgSrcs.length;
+      lbImg.src = imgSrcs[lbIndex];
+      lbCurrent.textContent = String(lbIndex + 1).padStart(2, '0');
+    }
+
+    slides.forEach((s, i) => s.querySelector('img').addEventListener('click', () => lbOpen(i)));
+    document.getElementById('lightbox-close').addEventListener('click', lbClose);
+    document.getElementById('lb-prev').addEventListener('click', () => lbNav(-1));
+    document.getElementById('lb-next').addEventListener('click', () => lbNav(1));
+    lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')     lbClose();
+      if (e.key === 'ArrowLeft')  lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+    });
+
+    let lbTouchX = 0;
+    lb.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const diff = lbTouchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) lbNav(diff > 0 ? 1 : -1);
+    });
   </script>
 </body>
 </html>
+
+
 
 
 
