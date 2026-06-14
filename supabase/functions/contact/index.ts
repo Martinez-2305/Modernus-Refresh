@@ -63,7 +63,7 @@ Deno.serve(async (req) => {
         from: `Modernus Website <${FROM_EMAIL}>`,
         to: [TO_EMAIL],
         reply_to: email,
-        subject: `New enquiry from ${esc(name)}`,
+        subject: `New enquiry from ${esc(String(name).replace(/[\r\n]+/g, ' ').slice(0, 120))}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a">
             <div style="background:#1a1a1a;padding:28px 32px">
