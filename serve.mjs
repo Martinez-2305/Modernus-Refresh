@@ -1,10 +1,10 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
-import { extname, join, normalize } from 'node:path';
+import { extname, resolve, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
 
 const root = dirname(fileURLToPath(import.meta.url));
+const rootWithSep = root.endsWith(sep) ? root : root + sep;
 const port = 3000;
 
 const types = {
@@ -28,8 +28,10 @@ const server = createServer(async (req, res) => {
   try {
     let urlPath = decodeURIComponent(new URL(req.url, `http://localhost:${port}`).pathname);
     if (urlPath.endsWith('/')) urlPath += 'index.html';
-    const filePath = normalize(join(root, urlPath));
-    if (!filePath.startsWith(root)) {
+    // Resolve against root, treating urlPath as relative ('.' prefix) so a
+    // leading '/' or '..' segments can't escape the served directory.
+    const filePath = resolve(root, '.' + urlPath);
+    if (filePath !== root && !filePath.startsWith(rootWithSep)) {
       res.writeHead(403).end('Forbidden');
       return;
     }
