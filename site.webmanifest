@@ -1,0 +1,25 @@
+{
+  "name": "Modernus Decoration Projects LTD",
+  "short_name": "Modernus",
+  "description": "Painting & decorating specialists serving Central & South West London.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e1e1e",
+  "lang": "en-GB",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
